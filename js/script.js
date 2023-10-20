@@ -1,46 +1,42 @@
-const btn = document.querySelector('button');
+const btn = document.querySelector('#generateBtn');
 const inputEl = document.getElementById('data');
 const resultEl = document.querySelector('.alert');
 
+const arraySequenze = document.getElementsByClassName('sequencePrinted');
 
-btn.addEventListener('click', function () {
-    //inputEl.
-    let num = parseInt(inputEl.value);
-    let alertColor;
-    if (!isNaN(num)) {
-        if (num % 2 === 1) {
-            num = num + 1;
+
+
+
+btn.addEventListener('click', game());
+
+function game() {
+
+
+
+    /**
+     * return an array containig 5 rnd generated numbers
+     * @param {*} totalnumbers 
+     * @returns 
+     */
+    function generatenumbers(totalnumbers) {
+        //return array 
+        out = [];
+        for (let i = 0; i < totalnumbers; i++) {
+            out.push(rndInt(1, 100));
         }
-        alertColor = 'alert-success';
-
-        resultEl.innerHTML = num;
-    } else {
-        console.log('errore')
-        alertColor = 'alert-danger'
-        resultEl.innerHTML = `inserire un numero`
+        return out;
     }
-    resultEl.classList.add(alertColor);
-    resultEl.classList.remove('d-none');
-});
 
-
-
-
-//utility 
-/**
-* given two integers, returns a pseudo-randomic between the two (included)
-* @param {Integer} min 
-* @param {Integer} max 
-* @returns {Integer}
-*/
-function rndInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+    /**
+    * given two integers, returns a pseudo-randomic between the two (included)
+    * @param {Integer} min 
+    * @param {Integer} max 
+    * @returns {Integer}
+    */
+    function rndInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
 }
-/**
-* given an integer return true if even, false if odd
-* @param {Integer} number  
-* @returns {Boolean} 
-*/
-function isEven(number) {
-    return !(number % 2);
-}
+
+
+
