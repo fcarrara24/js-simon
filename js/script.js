@@ -64,7 +64,7 @@ function game() {
         classListManager('data', 'd-none', 'remove');
         classListManager('btnSend', 'd-none', 'remove');
 
-    }, 30000);
+    }, 3000);
 
 
     //              //
