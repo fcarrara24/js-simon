@@ -4,9 +4,12 @@ const btn = document.getElementById('generateBtn');
 let outputArray = document.getElementsByClassName('sequencePrinted');
 
 
+game()
 
 
-btn.addEventListener('click', game());
+btn.addEventListener('click', () => {
+    location.reload()
+});
 btnSend.addEventListener('click', () => {
     let Inputuser = (classListManager('data', '', 'value'));
     console.log(Inputuser)
@@ -15,26 +18,32 @@ btnSend.addEventListener('click', () => {
     console.log(sequence)
     let output = classListManager('alert', '', 'get')[0];
     console.log('dsafasd')
-    if (checking()) {
-        output.innerHTML = 'grande, hai una memoria di ferro'
+    if (checking() === 5) {
+        output.innerHTML = 'grande, hai una memoria di ferro, hai indovinato 5 numeri'
+        output.classList.remove('alert-danger')
+        output.classList.add('alert-success')
+
     } else {
-        output.innerHTML = 'che peccato, il fosforo ti aiutera a ricordare'
+        output.innerHTML = `che peccato ne hai azzeccati solo ${checking()}, il fosforo ti aiutera a ricordare`
+
+
+        output.classList.remove('alert-success')
+        output.classList.add('alert-danger')
     }
     //remove d-none
     output.classList.remove('d-none');
 
     function checking() {
-        console.log('a')
-        console.log(sequence.length)
-        if (Inputuser.length !== sequence.length) {
-            return false
-        }
+        let contatore = 0;
+
         for (let i = 0; i < Inputuser.length; i++) {
             if (!(sequence.includes(Inputuser[i]))) {
-                return false;
+                return contatore;
+            } else {
+                contatore++
             }
         }
-        return true;
+        return contatore;
     }
 });
 
@@ -50,11 +59,12 @@ function game() {
     //timer to hide values
     setTimeout(() => {
         console.log('stop')
-        classListManager('sequencePrinted', 'd-none', 'add');
-        //alòlows user read
+        classListManager('sequencePrinted', 'd-none', 'toggle');
+        //allowing user to write
+        classListManager('data', 'd-none', 'remove');
+        classListManager('btnSend', 'd-none', 'remove');
 
-    }, 30000); // to change, now 3s
-
+    }, 30000);
 
 
     //              //
@@ -92,22 +102,7 @@ function game() {
 
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
 
 //utility function
 /**

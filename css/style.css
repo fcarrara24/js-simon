@@ -1,3 +1,7 @@
 #sequenceContainer{
     height: 100px;
 }
+
+.data{
+    max-width: 30px;
+}
